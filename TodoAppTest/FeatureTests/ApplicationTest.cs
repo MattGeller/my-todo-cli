@@ -1,64 +1,41 @@
-namespace TodoAppTest;
-using System.Diagnostics;
-using System.Text;
+using NUnit.Framework;
+using System;
+using System.IO;
 
-public class ApplicationTest
+namespace TodoAppTest
 {
-
-    [Test]
-    public void Show()
+    public class ApplicationTest
     {
-        // Arrange
-        var command = "show";
+        private StringWriter stringWriter;
+        private TextWriter originalOutput;
 
-        // Act
-        string actualOutput = RunConsoleApp(command);
-
-        // Assert
-        Assert.AreEqual("Hooray! No Items", actualOutput);
-    }
-
-    
-    private string RunConsoleApp(string command, string argument = "")
-    {
-        Process process = new Process();
-        process.StartInfo.FileName = "dotnet";
-        process.StartInfo.Arguments = $"run {command} {argument}";
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.UseShellExecute = false;
-        process.StartInfo.CreateNoWindow = true;
-
-        StringBuilder outputBuilder = new StringBuilder();
-
-        process.OutputDataReceived += (sender, e) =>
+        [SetUp]
+        public void Setup()
         {
-            if (!string.IsNullOrEmpty(e.Data))
-            {
-                outputBuilder.AppendLine(e.Data);
-            }
-        };
+            stringWriter = new StringWriter();
+            originalOutput = Console.Out;
+            Console.SetOut(stringWriter);
+        }
 
-        process.Start();
-        process.BeginOutputReadLine();
-        process.WaitForExit();
+        [TearDown]
+        public void Cleanup()
+        {
+            Console.SetOut(originalOutput);
+            stringWriter.Dispose();
+        }
 
-        return outputBuilder.ToString().Trim();
+        [Test]
+        public void Show()
+        {
+            // Arrange
+            var command = "show";
+
+            // Act
+            Program.Main(new[] { command });
+
+            // Assert
+            string actualOutput = stringWriter.ToString().Trim();
+            Assert.AreEqual("Hooray! No Items", actualOutput);
+        }
     }
-
-
-    // private string RunConsoleApp(string command, string argument = "")
-    //     {
-    //         Process process = new Process();
-    //         process.StartInfo.FileName = "dotnet";
-    //         process.StartInfo.Arguments = $"run {command} {argument}";
-    //         process.StartInfo.RedirectStandardOutput = true;
-    //         process.StartInfo.UseShellExecute = false;
-    //         process.StartInfo.CreateNoWindow = true;
-
-    //         process.Start();
-    //         string output = process.StandardOutput.ReadToEnd();
-    //         process.WaitForExit();
-
-    //         return output;
-    //     }
 }
