@@ -37,5 +37,20 @@ namespace TodoAppTest
             string actualOutput = stringWriter.ToString().Trim();
             Assert.AreEqual("Hooray! No Items", actualOutput);
         }
+
+        [Test]
+        public void Add()
+        {
+            // Arrange
+            var command = "add";
+            var text = "Learn C#";
+
+            // Act
+            Program.Main(new[] { command, text });
+
+            // Assert
+            string actualOutput = stringWriter.ToString().Trim();
+            Assert.AreEqual("0: Learn C#", actualOutput);
+        }
     }
 }
