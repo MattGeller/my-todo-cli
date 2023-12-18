@@ -51,10 +51,25 @@ namespace TodoAppTest
             Assert.AreEqual($"0: {text}", actualOutput);
         }
 
+        [Test]
+        public void Reset()
+        {
+            // Arrange
+            RunProgram("add", "Write C#");
+
+            // Act
+            string actualOutput = RunProgram("reset");
+
+            // Assert
+            Assert.AreEqual("Hooray! No Items", actualOutput);
+        }
+
         private string RunProgram(string command, string text = "")
         {
             Program.Main([command, text]);
-            return stringWriter.ToString().Trim();
+            string result = stringWriter.ToString().Trim();
+            stringWriter.GetStringBuilder().Clear();
+            return result;
         }
     }
 }
