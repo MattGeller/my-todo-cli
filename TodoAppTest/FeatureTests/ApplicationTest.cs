@@ -48,7 +48,7 @@ namespace TodoAppTest
             string actualOutput = RunProgram(command, text);
 
             // Assert
-            Assert.AreEqual("0: Learn C#", actualOutput);
+            Assert.AreEqual($"0: {text}", actualOutput);
         }
 
         private string RunProgram(string command, string text = "")
