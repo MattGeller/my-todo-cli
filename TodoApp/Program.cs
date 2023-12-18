@@ -5,7 +5,7 @@ public class Program {
     {
         string action = (args.Length == 0) ? "" : args[0];
 
-        var todoList = new TodoList();
+        var todoList = new TodoListController();
 
         switch(action) 
         {

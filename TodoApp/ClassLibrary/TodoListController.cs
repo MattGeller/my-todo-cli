@@ -1,4 +1,4 @@
-public class TodoList
+public class TodoListController
 {
     public List<TodoItem> Items = new List<TodoItem>();
 

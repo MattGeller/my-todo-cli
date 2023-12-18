@@ -2,24 +2,24 @@ namespace TodoAppTest;
 
 public class Tests
 {
-    private TodoList todoList;
+    private TodoListController todoListController;
 
     [SetUp]
     public void Setup()
     {
-        todoList = new TodoList();
+        todoListController = new TodoListController();
     }
 
     [Test]
     public void Show() {
-        todoList.Add("Eat");
-        todoList.Add("Sleep");
-        todoList.Add("Dream");
+        todoListController.Add("Eat");
+        todoListController.Add("Sleep");
+        todoListController.Add("Dream");
 
         var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
 
-        todoList.Show();
+        todoListController.Show();
 
         Assert.IsTrue(stringWriter.ToString().Contains("Eat"));
         Assert.IsTrue(stringWriter.ToString().Contains("Sleep"));
@@ -30,29 +30,29 @@ public class Tests
     public void Add()
     {
         string itemText = "Learn C#";
-        todoList.Add(itemText);
+        todoListController.Add(itemText);
 
-        Assert.That(todoList.Items.Count, Is.EqualTo(1));
-        Assert.That(todoList.Items[0].Text, Is.EqualTo(itemText));
+        Assert.That(todoListController.Items.Count, Is.EqualTo(1));
+        Assert.That(todoListController.Items[0].Text, Is.EqualTo(itemText));
     }
 
     [Test]
     public void Reset()
     {
-        todoList.Add("Write C#");
-        todoList.Add("Dream about C#");
+        todoListController.Add("Write C#");
+        todoListController.Add("Dream about C#");
 
-        todoList.Reset();
-        Assert.That(todoList.Items.Count, Is.EqualTo(0));
+        todoListController.Reset();
+        Assert.That(todoListController.Items.Count, Is.EqualTo(0));
     }
 
     [Test]
     public void Complete()
     {
-        todoList.Add("Write C#");
-        todoList.Add("Dream about C#");
-        todoList.Complete(0);
+        todoListController.Add("Write C#");
+        todoListController.Add("Dream about C#");
+        todoListController.Complete(0);
 
-        Assert.That(todoList.Items[0].Text, Is.EqualTo("Dream about C#"));
+        Assert.That(todoListController.Items[0].Text, Is.EqualTo("Dream about C#"));
     }
 }
