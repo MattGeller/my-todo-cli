@@ -64,6 +64,20 @@ namespace TodoAppTest
             Assert.AreEqual("Hooray! No Items", actualOutput);
         }
 
+        [Test]
+        [Ignore("Cannot work without persisting the todo list across runs")]
+        public void Complete()
+        {
+            // Arrange
+            RunProgram("add", "Write C#");
+
+            // Act
+            string actualOutput = RunProgram("complete", "0");
+
+            // Assert
+            Assert.AreEqual("Hooray! No Items", actualOutput);
+        }
+
         private string RunProgram(string command, string text = "")
         {
             Program.Main([command, text]);
