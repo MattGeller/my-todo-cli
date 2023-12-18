@@ -54,7 +54,7 @@ namespace TodoAppTest
 
         private string RunProgram(string command)
         {
-            Program.Main(new[] { command });
+            Program.Main([command]);
             return stringWriter.ToString().Trim();
         }
     }
