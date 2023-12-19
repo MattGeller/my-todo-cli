@@ -2,53 +2,71 @@ namespace TodoAppTest;
 
 public class TodoListFileBackendTests
 {
-    public class WhenTheListIsEmpty
+    protected TodoListFileBackend? backend;
+    public class WhenTheListIsEmpty : TodoListFileBackendTests
     {
-        private TodoListFileBackend emptyFileBackend;
-
         [SetUp]
         public void SetupEmptyFile()
         {
-            emptyFileBackend = new TodoListFileBackend("empty-list.txt");
-            emptyFileBackend.Clear();
+            backend = new TodoListFileBackend("empty-list.txt");
+            backend.Clear();
         }
 
         [Test]
-        public void TestEmptyFile_Any()
+        public void Any_returns_false()
         {
-            Assert.IsFalse(emptyFileBackend.Any());
+            Assert.IsFalse(backend.Any());
         }
 
         [Test]
-        public void TestEmptyFile_Count()
+        public void Count_returns_0()
         {
-            Assert.AreEqual(0, emptyFileBackend.Count());
+            Assert.AreEqual(0, backend.Count());
+        }
+
+        [Test]
+        public void Add_increases_the_count()
+        {
+            backend.Add("Learn C#");
+            Assert.AreEqual(1, backend.Count());
         }
     }
 
-    public class WhenTheListIsNotEmpty
+    public class WhenTheListIsNotEmpty : TodoListFileBackendTests
     {
-        private TodoListFileBackend nonEmptyFileBackend;
-
         [SetUp]
         public void SetupNonEmptyFile()
         {
-            nonEmptyFileBackend = new TodoListFileBackend("nonempty-list.txt");
-            nonEmptyFileBackend.Clear();
-            nonEmptyFileBackend.Add("Learn C#");
-            nonEmptyFileBackend.Add("Write tests");
+            backend = new TodoListFileBackend("nonempty-list.txt");
+            backend.Clear();
+            backend.Add("Learn C#");
+            backend.Add("Write tests");
         }
 
         [Test]
-        public void TestNonEmptyFile_Any()
+        public void Any_returns_true()
         {
-            Assert.IsTrue(nonEmptyFileBackend.Any());
+            Assert.IsTrue(backend.Any());
         }
 
         [Test]
-        public void TestNonEmptyFile_Count()
+        public void Count_returns_2()
         {
-            Assert.AreEqual(2, nonEmptyFileBackend.Count());
+            Assert.AreEqual(2, backend.Count());
+        }
+
+        [Test]
+        public void RemoveAt_decreases_the_count()
+        {
+            backend.RemoveAt(0);
+            Assert.AreEqual(1, backend.Count());
+        }
+
+        [Test]
+        public void Clear_sets_the_count_to_0()
+        {
+            backend.Clear();
+            Assert.AreEqual(0, backend.Count());
         }
     }
 }
