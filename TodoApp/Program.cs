@@ -5,22 +5,23 @@ public class Program {
     {
         string action = (args.Length == 0) ? "" : args[0];
 
-        var todoList = new TodoListController();
+        var backend = new TodoListFileBackend("my-list.txt");
+        var todoListController = new TodoListController(backend);
 
         switch(action) 
         {
             case "add":
                 string text = String.Join(" ", args[1..]);
-                todoList.Add(text);
+                todoListController.Add(text);
                 break;
             case "complete":
                 int index = int.Parse(args[1]);
-                todoList.Complete(index);
+                todoListController.Complete(index);
                 break;
             case "reset":
-                todoList.Reset();
+                todoListController.Reset();
                 break;
         }
-        todoList.Show();
+        todoListController.Show();
     }
 }

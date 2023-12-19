@@ -1,29 +1,34 @@
 public class TodoListController
 {
-    public List<TodoItem> Items = new List<TodoItem>();
+    public ITodoListBackend Backend;
+
+    public TodoListController(ITodoListBackend backend)
+    {
+        Backend = backend;
+    }
 
     public void Show()
     {
-        if (!Items.Any())
+        if (!Backend.Any())
         {
             Console.WriteLine("Hooray! No Items");
             return;
         }
-        for (int i = 0; i < Items.Count; i++)
+        for (int i = 0; i < Backend.Count(); i++)
         {
-            Console.WriteLine($"{i}: {Items[i].Text}");
+            Console.WriteLine($"{i}: {Backend[i].Text}");
         }
     }
     public void Add(string text)
     {
-        Items.Add(new TodoItem(text));
+        Backend.Add(text);
     }
     public void Complete(int index)
     {
-        Items.RemoveAt(index);
+        Backend.RemoveAt(index);
     }
     public void Reset()
     {
-        Items.Clear();
+        Backend.Clear();
     }
 }

@@ -7,7 +7,8 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        todoListController = new TodoListController();
+        var backend = new TodoListFileBackend("test-list.txt");
+        todoListController = new TodoListController(backend);
     }
 
     [Test]
