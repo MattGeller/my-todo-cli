@@ -46,27 +46,27 @@ public class TodoListFileBackendTests
         [Test]
         public void Any_returns_true()
         {
-            Assert.IsTrue(backend.Any());
+            Assert.That(backend.Any(), Is.True);
         }
 
         [Test]
         public void Count_returns_2()
         {
-            Assert.AreEqual(2, backend.Count());
+            Assert.That(backend.Count(), Is.EqualTo(2));
         }
 
         [Test]
         public void RemoveAt_decreases_the_count()
         {
             backend.RemoveAt(0);
-            Assert.AreEqual(1, backend.Count());
+            Assert.That(backend.Count(), Is.EqualTo(1));
         }
 
         [Test]
         public void Clear_sets_the_count_to_0()
         {
             backend.Clear();
-            Assert.AreEqual(0, backend.Count());
+            Assert.That(backend.Count(), Is.EqualTo(0));
         }
     }
 }
