@@ -1,6 +1,6 @@
 namespace TodoAppTest;
 
-public class Tests
+public class TodoListControllerTests
 {
     private TodoListController todoListController;
 
