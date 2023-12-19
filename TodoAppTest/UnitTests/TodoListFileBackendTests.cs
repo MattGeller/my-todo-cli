@@ -3,6 +3,7 @@ namespace TodoAppTest;
 public class TodoListFileBackendTests
 {
     protected TodoListFileBackend? backend;
+
     public class WhenTheListIsEmpty : TodoListFileBackendTests
     {
         [SetUp]
@@ -15,20 +16,20 @@ public class TodoListFileBackendTests
         [Test]
         public void Any_returns_false()
         {
-            Assert.IsFalse(backend.Any());
+            Assert.That(backend.Any(), Is.False);
         }
 
         [Test]
         public void Count_returns_0()
         {
-            Assert.AreEqual(0, backend.Count());
+            Assert.That(backend.Count(), Is.EqualTo(0));
         }
 
         [Test]
         public void Add_increases_the_count()
         {
             backend.Add("Learn C#");
-            Assert.AreEqual(1, backend.Count());
+            Assert.That(backend.Count(), Is.EqualTo(1));
         }
     }
 

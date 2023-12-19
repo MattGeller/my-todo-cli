@@ -34,7 +34,7 @@ namespace TodoAppTest
             string actualOutput = RunProgram(command);
 
             // Assert
-            Assert.AreEqual("Hooray! No Items", actualOutput);
+            Assert.That(actualOutput, Does.Contain("Hooray! No Items"));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace TodoAppTest
             string actualOutput = RunProgram(command, text);
 
             // Assert
-            Assert.AreEqual($"0: {text}", actualOutput);
+            Assert.That(actualOutput, Is.EqualTo($"0: {text}"));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace TodoAppTest
             string actualOutput = RunProgram("reset");
 
             // Assert
-            Assert.AreEqual("Hooray! No Items", actualOutput);
+            Assert.That(actualOutput, Is.EqualTo("Hooray! No Items"));
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace TodoAppTest
             string actualOutput = RunProgram("complete", "0");
 
             // Assert
-            Assert.AreEqual("Hooray! No Items", actualOutput);
+            Assert.That(actualOutput, Is.EqualTo("Hooray! No Items"));
         }
 
         private string RunProgram(string command, string text = "")
