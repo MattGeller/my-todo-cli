@@ -19,7 +19,7 @@ public class TodoListFileBackend : ITodoListBackend
     {
         using (StreamReader reader = new StreamReader(filePath))
         {
-            string line;
+            string? line;
             while ((line = reader.ReadLine()) != null)
             {
                 items.Add(new TodoItem(line));
