@@ -27,6 +27,16 @@ public class TodoListControllerTests
         Assert.IsTrue(stringWriter.ToString().Contains("Dream"));
     }
 
+    [Test]
+    public void Complete_does_not_throw_an_exception_when_index_is_out_of_range()
+    {
+        todoListController.Add("Eat");
+        todoListController.Add("Sleep");
+        todoListController.Add("Dream");
+
+        todoListController.Complete(3);
+    }
+
     // TODO: Items is no longer publicly accessible 
     // [Test]
     // public void Add()

@@ -25,7 +25,10 @@ public class TodoListController
     }
     public void Complete(int index)
     {
-        Backend.RemoveAt(index);
+        if (index < Backend.Count())
+        {
+            Backend.RemoveAt(index);
+        }
     }
     public void Reset()
     {
